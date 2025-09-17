@@ -1,2 +1,4 @@
-gendiff-help:
-	node gendiff.js -h
+lint:
+	npx eslint .
+
+.PHONY: lint
