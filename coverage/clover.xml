@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1758199416066" clover="3.2.0">
+  <project timestamp="1758199416066" name="All files">
+    <metrics statements="12" coveredstatements="12" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2" elements="20" coveredelements="20" complexity="0" loc="12" ncloc="12" packages="1" files="1" classes="1"/>
+    <file name="diff.js" path="/Users/evgeniystepanov/frontend-project-46/src/diff.js">
+      <metrics statements="12" coveredstatements="12" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="2" count="5" type="stmt"/>
+      <line num="3" count="5" type="stmt"/>
+      <line num="5" count="5" type="stmt"/>
+      <line num="6" count="4" type="cond" truecount="2" falsecount="0"/>
+      <line num="7" count="1" type="stmt"/>
+      <line num="9" count="3" type="cond" truecount="2" falsecount="0"/>
+      <line num="10" count="1" type="stmt"/>
+      <line num="12" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="13" count="1" type="stmt"/>
+      <line num="18" count="1" type="stmt"/>
+      <line num="21" count="5" type="stmt"/>
+    </file>
+  </project>
+</coverage>
