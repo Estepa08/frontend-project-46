@@ -1,6 +1,10 @@
-lint:
-	npx eslint .
-lint fix:
-	npx eslint . --fix
+.PHONY: test lint fix
 
-.PHONY: lint
+test:
+	npm test
+
+lint:
+	npx eslint . 
+
+fix:
+	npx eslint . --fix
