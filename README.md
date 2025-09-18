@@ -3,7 +3,7 @@
 
 
 
-[![Lint and Test](https://github.com/Estepa08/frontend-project-46/actions/workflows/test-and-lint.yml/badge.svg)](https://github.com/Estepa08/frontend-project-46/actions/workflows/test-and-lint.yml)
+
 
 ## 🎮 Демонстрация работы
 
