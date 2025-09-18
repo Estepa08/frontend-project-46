@@ -5,6 +5,8 @@
 
 [![lint and test](https://github.com/Estepa08/frontend-project-46/actions/workflows/test-and-lint.yml/badge.svg?branch=main)](https://github.com/Estepa08/frontend-project-46/actions/workflows/test-and-lint.yml)
 
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Estepa08_frontend-project-46&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Estepa08_frontend-project-46)
+
 ## 🎮 Демонстрация работы
 
 - **Difference calculator:**  [Посмотреть демо](https://asciinema.org/a/D6yqwbJuq3xnfOW6Dfhe8YXV4)
