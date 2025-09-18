@@ -32,7 +32,8 @@ jobs:
 
       - name: Run SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           organization: evgeniystepanov
           projectKey: evgeniystepanov_frontend-project-46
-          token: ${{ secrets.SONAR_TOKEN }}
