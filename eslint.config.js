@@ -12,7 +12,7 @@ export default defineConfig([
     languageOptions: {
       globals: {
         ...globals.node,
-        ...globals.jest, // 👈 добавили поддержку jest
+        ...globals.jest,
       },
     },
   },
