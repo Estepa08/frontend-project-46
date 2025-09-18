@@ -29,3 +29,10 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Run SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        with:
+          organization: evgeniystepanov
+          projectKey: evgeniystepanov_frontend-project-46
+          token: ${{ secrets.SONAR_TOKEN }}
