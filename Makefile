@@ -3,11 +3,11 @@
 test:
 	npm test
 
-test watch:
+test-watch:
 	npm run test:watch
 
 test-coverage:
-	npm test -- --coverage	
+	npm test -- --coverage
 
 lint:
 	npx eslint . 
