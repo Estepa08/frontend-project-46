@@ -23,23 +23,23 @@ const compareFiles = (file1, file2, expectedFile) => {
 }
 
 describe('diff', () => {
-  test('оба объекта пустые', () => {
+  test('both objects are empty', () => {
     compareFiles('empty1.json', 'empty2.json', 'empty_result.txt')
   })
 
-  test('ключ только в первом объекте', () => {
+  test('key exists only in first object', () => {
     compareFiles('file1.json', 'file2.json', 'expected1.txt')
   })
 
-  test('ключ только во втором объекте', () => {
+  test('key exists only in second object', () => {
     compareFiles('file2.json', 'file1.json', 'expected2.txt')
   })
 
-  test('ключ в обоих объектах, значение одинаковое', () => {
+  test('key exists in both objects with same value', () => {
     compareFiles('file1.json', 'file1.json', 'expected3.txt')
   })
 
-  test('ключ в обоих объектах, значения разные', () => {
+  test('key exists in both objects with different values', () => {
     compareFiles('file1.json', 'file3.json', 'expected4.txt')
   })
 })
