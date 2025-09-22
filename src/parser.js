@@ -1,13 +1,22 @@
-import fs from 'fs'
+import yaml from 'js-yaml'
 import path from 'path'
+import { getAbsolutePath, readFile } from './fileUtils.js'
 
-export const parseJSON = (filepath) => {
-  const absolutePath = path.resolve(process.cwd(), filepath)
+const parsers = {
+  '.json': JSON.parse,
+  '.yml': yaml.load,
+  '.yaml': yaml.load,
+}
 
-  if (!fs.existsSync(absolutePath)) {
-    throw new Error(`File not found: ${filepath}`)
+export const parseFile = (filepath) => {
+  const absolutePath = getAbsolutePath(filepath)
+  const extname = path.extname(filepath)
+  const parse = parsers[extname]
+
+  if (!parse) {
+    throw new Error(`Unsupported file format: ${extname}`)
   }
 
-  const data = fs.readFileSync(absolutePath, 'utf-8')
-  return JSON.parse(data)
+  const rawData = readFile(absolutePath)
+  return parse(rawData)
 }
