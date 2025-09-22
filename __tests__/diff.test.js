@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const getFixturePath = filename =>
-  path.join(__dirname, '..', '__fixtures__', filename)
+  path.join(__dirname, '..', '__fixtures__', 'diff', filename)
 
 const compareFiles = (file1, file2, expectedFile) => {
   const obj1 = parseFile(getFixturePath(file1))

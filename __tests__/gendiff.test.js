@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const getFixturePath = filename =>
-  path.join(__dirname, '..', '__fixtures__', filename)
+  path.join(__dirname, '..', '__fixtures__', 'gendiff', filename)
 
 const compareFiles = (file1Path, file2Path, expectedPath) => {
   const file1 = getFixturePath(file1Path)
@@ -31,8 +31,24 @@ describe('gendiff (integration)', () => {
       compareFiles('test_file1.json', 'test_file2.json', 'expected_json.txt')
     })
 
-    test('compare YAML files', () => {
+    test('compare YML files', () => {
       compareFiles('test_file1.yml', 'test_file2.yml', 'expected_yaml.txt')
+    })
+
+    test('compare YAML files', () => {
+      compareFiles('test_file1.yaml', 'test_file2.yaml', 'expected_yaml.txt')
+    })
+
+    test('compare JSON vs YAML', () => {
+      compareFiles('test_file1.json', 'test_file2.yaml', 'expected_yaml.txt')
+    })
+
+    test('compare JSON vs YML', () => {
+      compareFiles('test_file1.json', 'test_file2.yml', 'expected_yaml.txt')
+    })
+
+    test('compare YML vs YAML', () => {
+      compareFiles('test_file1.yml', 'test_file2.yaml', 'expected_yaml.txt')
     })
   })
 
