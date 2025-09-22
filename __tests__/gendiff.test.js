@@ -10,34 +10,39 @@ const __dirname = dirname(__filename)
 const getFixturePath = filename =>
   path.join(__dirname, '..', '__fixtures__', filename)
 
+const compareFiles = (file1Path, file2Path, expectedPath) => {
+  const file1 = getFixturePath(file1Path)
+  const file2 = getFixturePath(file2Path)
+  const expected = readFile(getFixturePath(expectedPath))
+
+  expect(gendiff(file1, file2).diff).toBe(expected)
+}
+
+const expectError = (file1Path, file2Path, errorMessage) => {
+  const file1 = getFixturePath(file1Path)
+  const file2 = getFixturePath(file2Path)
+
+  expect(() => gendiff(file1, file2)).toThrow(errorMessage)
+}
+
 describe('gendiff (integration)', () => {
-  test('compare JSON files', () => {
-    const file1 = getFixturePath('test_file1.json')
-    const file2 = getFixturePath('test_file2.json')
-    const expected = readFile(getFixturePath('expected_json.txt'))
+  describe('successful comparisons', () => {
+    test('compare JSON files', () => {
+      compareFiles('test_file1.json', 'test_file2.json', 'expected_json.txt')
+    })
 
-    expect(gendiff(file1, file2).diff).toBe(expected)
+    test('compare YAML files', () => {
+      compareFiles('test_file1.yml', 'test_file2.yml', 'expected_yaml.txt')
+    })
   })
 
-  test('compare YAML files', () => {
-    const file1 = getFixturePath('test_file1.yml')
-    const file2 = getFixturePath('test_file2.yml')
-    const expected = readFile(getFixturePath('expected_yaml.txt'))
+  describe('error handling', () => {
+    test('error on unsupported file format', () => {
+      expectError('file1.txt', 'file2.txt', 'Unsupported file format')
+    })
 
-    expect(gendiff(file1, file2).diff).toBe(expected)
-  })
-
-  test('error on unsupported file format', () => {
-    const file1 = getFixturePath('file1.txt')
-    const file2 = getFixturePath('file2.txt')
-
-    expect(() => gendiff(file1, file2)).toThrow('Unsupported file format')
-  })
-
-  test('error on file not found', () => {
-    const file1 = getFixturePath('not_exist.json')
-    const file2 = getFixturePath('file2.json')
-
-    expect(() => gendiff(file1, file2)).toThrow('File not found')
+    test('error on file not found', () => {
+      expectError('not_exist.json', 'file2.json', 'File not found')
+    })
   })
 })
