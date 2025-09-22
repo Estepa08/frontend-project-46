@@ -1,5 +1,6 @@
 export const diff = (obj1, obj2) => {
   const keys = [...new Set([...Object.keys(obj1), ...Object.keys(obj2)])]
+    .sort((a, b) => a.localeCompare(b))
 
   const lines = keys.map((key) => {
     if (!Object.hasOwn(obj2, key)) {

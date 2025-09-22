@@ -1,4 +1,4 @@
-import { parseFile } from './parser.js'
+import { parseFile } from './parsers.js'
 import { diff } from './diff.js'
 
 export const gendiff = (filepath1, filepath2) => {

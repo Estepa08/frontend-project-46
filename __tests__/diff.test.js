@@ -1,8 +1,9 @@
 import path, { dirname } from 'path'
-import fs from 'fs'
 import { fileURLToPath } from 'url'
 
-import { diff } from '../src/diff'
+import { parseFile } from '../src/parsers.js'
+import { readFile } from '../src/fileUtils.js'
+import { diff } from '../src/diff.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -10,15 +11,10 @@ const __dirname = dirname(__filename)
 const getFixturePath = filename =>
   path.join(__dirname, '..', '__fixtures__', filename)
 
-const readFile = filename =>
-  fs.readFileSync(getFixturePath(filename), 'utf-8')
-
-const readJson = filename => JSON.parse(readFile(filename))
-
 const compareFiles = (file1, file2, expectedFile) => {
-  const obj1 = readJson(file1)
-  const obj2 = readJson(file2)
-  const expected = readFile(expectedFile)
+  const obj1 = parseFile(getFixturePath(file1))
+  const obj2 = parseFile(getFixturePath(file2))
+  const expected = readFile(getFixturePath(expectedFile))
   expect(diff(obj1, obj2)).toBe(expected)
 }
 
