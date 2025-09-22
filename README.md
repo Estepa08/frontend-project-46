@@ -3,5 +3,6 @@
 
 ## 🎮 Демонстрация работы
 
-- **Diff: JSON/JSON**      [Посмотреть демо](https://asciinema.org/a/D6yqwbJuq3xnfOW6Dfhe8YXV4)
+- **Diff: JSON/JSON**      [![asciicast](https://asciinema.org/a/D6yqwbJuq3xnfOW6Dfhe8YXV4.svg)](https://asciinema.org/a/D6yqwbJuq3xnfOW6Dfhe8YXV4)
+
 - **Diff: JSON/YAML/YML**  [Посмотреть демо](https://asciinema.org/a/Cq3EUEWLHKjXe5VMP1g1lKcfJ)
