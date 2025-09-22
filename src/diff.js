@@ -15,7 +15,7 @@ export const diff = (obj1, obj2) => {
         `  + ${key}: ${obj2[key]}`,
       ].join('\n')
     }
-    return `  ${key}: ${obj1[key]}`
+    return `    ${key}: ${obj1[key]}`
   })
 
   return `{\n${lines.join('\n')}\n}`
