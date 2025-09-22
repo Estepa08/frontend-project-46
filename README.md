@@ -4,9 +4,9 @@
 ## 🎮 Демонстрация работы
 
 **Diff: JSON/JSON**
-
 [![asciicast](https://asciinema.org/a/D6yqwbJuq3xnfOW6Dfhe8YXV4.svg)](https://asciinema.org/a/D6yqwbJuq3xnfOW6Dfhe8YXV4)
 
-**Diff: JSON/YAML/YML**
 
-[![asciicast](https://asciinema.org/a/Cq3EUEWLHKjXe5VMP1g1lKcfJ.svg)](https://asciinema.org/a/Cq3EUEWLHKjXe5VMP1g1lKcfJ)
+**Diff: JSON/YAML/YML**
+[![asciicast](https://asciinema.org/a/kbk2LfWWDy9GBH6zNRPKWKT7v.svg)](https://asciinema.org/a/kbk2LfWWDy9GBH6zNRPKWKT7v)
+
