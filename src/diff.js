@@ -1,11 +1,8 @@
-import { stylish } from './formatter.js'
+import format from './formatter/index.js'
 
-export const diff = (obj1, obj2, format = 'stylish') => {
+export const diff = (obj1, obj2, formatName) => {
   const diffTree = buildDiff(obj1, obj2)
-  if (format === 'stylish') {
-    return stylish(diffTree)
-  }
-  throw new Error(`Unknown format: ${format}`)
+  return format(diffTree, formatName)
 }
 
 const isObject = value =>

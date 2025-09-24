@@ -11,35 +11,39 @@ const __dirname = dirname(__filename)
 const getFixturePath = filename =>
   path.join(__dirname, '..', '__fixtures__', filename)
 
-const compareFiles = (file1, file2, expectedFile) => {
+const compareFiles = (file1, file2, format, expectedFile) => {
   const obj1 = parseFile(getFixturePath(file1))
   const obj2 = parseFile(getFixturePath(file2))
   const expected = readFile(getFixturePath(expectedFile))
-  expect(diff(obj1, obj2)).toBe(expected)
+  expect(diff(obj1, obj2, format)).toBe(expected)
 }
 
 describe('diff', () => {
   test('json vs json', () => {
-    compareFiles('file1.json', 'file2.json', 'expected_json.txt')
+    compareFiles('file1.json', 'file2.json', 'stylish', 'expected_json.txt')
   })
 
   test('yaml vs yaml', () => {
-    compareFiles('file1.yaml', 'file2.yaml', 'expected_json.txt')
+    compareFiles('file1.yaml', 'file2.yaml', 'stylish', 'expected_json.txt')
   })
 
   test('yml vs yml', () => {
-    compareFiles('file1.yml', 'file2.yml', 'expected_json.txt')
+    compareFiles('file1.yml', 'file2.yml', 'stylish', 'expected_json.txt')
   })
 
   test('json vs yaml', () => {
-    compareFiles('file1.json', 'file2.yaml', 'expected_json.txt')
+    compareFiles('file1.json', 'file2.yaml', 'stylish', 'expected_json.txt')
   })
 
   test('json vs yml', () => {
-    compareFiles('file1.json', 'file2.yml', 'expected_json.txt')
+    compareFiles('file1.json', 'file2.yml', 'stylish', 'expected_json.txt')
+  })
+
+  test('json vs json to plain', () => {
+    compareFiles('file1.json', 'file2.json', 'plain', 'expected_plain.txt')
   })
 
   test('yaml vs yml', () => {
-    compareFiles('file1.yaml', 'file2.yml', 'expected_json.txt')
+    compareFiles('file1.yaml', 'file2.yml', 'stylish', 'expected_json.txt')
   })
 })
