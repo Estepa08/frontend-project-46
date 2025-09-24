@@ -10,3 +10,7 @@
 **Diff: JSON/YAML/YML**
 [![asciicast](https://asciinema.org/a/kbk2LfWWDy9GBH6zNRPKWKT7v.svg)](https://asciinema.org/a/kbk2LfWWDy9GBH6zNRPKWKT7v)
 
+
+**Diff: NESTING**
+[![asciicast](https://asciinema.org/a/kDfsceVtKMOUgzj7Jh0OMaiOL.svg)](https://asciinema.org/a/kDfsceVtKMOUgzj7Jh0OMaiOL)
+
