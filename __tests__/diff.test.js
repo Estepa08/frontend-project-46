@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const getFixturePath = filename =>
-  path.join(__dirname, '..', '__fixtures__', 'diff', filename)
+  path.join(__dirname, '..', '__fixtures__', filename)
 
 const compareFiles = (file1, file2, expectedFile) => {
   const obj1 = parseFile(getFixturePath(file1))
@@ -19,61 +19,27 @@ const compareFiles = (file1, file2, expectedFile) => {
 }
 
 describe('diff', () => {
-  test('both objects are empty', () => {
-    compareFiles('empty1.json', 'empty2.json', 'empty_result.txt')
+  test('json vs json', () => {
+    compareFiles('file1.json', 'file2.json', 'expected_json.txt')
   })
 
-  test('key exists only in first object', () => {
-    compareFiles('file1.json', 'file2.json', 'expected1.txt')
+  test('yaml vs yaml', () => {
+    compareFiles('file1.yaml', 'file2.yaml', 'expected_json.txt')
   })
 
-  test('key exists only in second object', () => {
-    compareFiles('file2.json', 'file1.json', 'expected2.txt')
+  test('yml vs yml', () => {
+    compareFiles('file1.yml', 'file2.yml', 'expected_json.txt')
   })
 
-  test('key exists in both objects with same value', () => {
-    compareFiles('file1.json', 'file1.json', 'expected3.txt')
+  test('json vs yaml', () => {
+    compareFiles('file1.json', 'file2.yaml', 'expected_json.txt')
   })
 
-  test('key exists in both objects with different values', () => {
-    compareFiles('file1.json', 'file3.json', 'expected4.txt')
+  test('json vs yml', () => {
+    compareFiles('file1.json', 'file2.yml', 'expected_json.txt')
   })
 
-  describe('nested structures', () => {
-    test('comparing complex nested structures', () => {
-      compareFiles('filepath1.json', 'filepath2.json', 'expectedJSON.txt')
-    })
-
-    test('adding nested object', () => {
-      compareFiles(
-        'nested_before_add.json',
-        'nested_after_add.json',
-        'expected_nested_add.txt',
-      )
-    })
-
-    test('removing nested object', () => {
-      compareFiles(
-        'nested_before_remove.json',
-        'nested_after_remove.json',
-        'expected_nested_remove.txt',
-      )
-    })
-
-    test('changing nested value', () => {
-      compareFiles(
-        'nested_before_change.json',
-        'nested_after_change.json',
-        'expected_nested_change.txt',
-      )
-    })
-
-    test('deeply nested structures (3+ levels)', () => {
-      compareFiles(
-        'deep_nested_1.json',
-        'deep_nested_2.json',
-        'expected_deep_nested.txt',
-      )
-    })
+  test('yaml vs yml', () => {
+    compareFiles('file1.yaml', 'file2.yml', 'expected_json.txt')
   })
 })

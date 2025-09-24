@@ -1,3 +1,0 @@
-Another text file
-that should not be supported
-by the diff tool

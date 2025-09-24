@@ -7,11 +7,7 @@ export const getAbsolutePath = (filepath) => {
     return absolutePath
   }
 
-  const examplesPath = path.resolve(
-    process.cwd(),
-    'examples',
-    filepath,
-  )
+  const examplesPath = path.resolve(process.cwd(), '__fixtures__', filepath)
   if (fs.existsSync(examplesPath)) {
     return examplesPath
   }
