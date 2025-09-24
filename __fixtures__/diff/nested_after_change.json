@@ -1,0 +1,7 @@
+{
+  "common": {
+    "setting1": {
+      "key": "new value"
+    }
+  }
+}
