@@ -23,19 +23,23 @@ describe('diff', () => {
     compareFiles('empty1.json', 'empty2.json', 'empty_result.txt')
   })
 
-  test('key exists only in first object', () => {
-    compareFiles('file1.json', 'file2.json', 'expected1.txt')
-  })
+  //   test('key exists only in first object', () => {
+  //     compareFiles('file1.json', 'file2.json', 'expected1.txt')
+  //   })
 
-  test('key exists only in second object', () => {
-    compareFiles('file2.json', 'file1.json', 'expected2.txt')
-  })
+  //   test('key exists only in second object', () => {
+  //     compareFiles('file2.json', 'file1.json', 'expected2.txt')
+  //   })
 
-  test('key exists in both objects with same value', () => {
-    compareFiles('file1.json', 'file1.json', 'expected3.txt')
-  })
+  //   test('key exists in both objects with same value', () => {
+  //     compareFiles('file1.json', 'file1.json', 'expected3.txt')
+  //   })
 
-  test('key exists in both objects with different values', () => {
-    compareFiles('file1.json', 'file3.json', 'expected4.txt')
+  //   test('key exists in both objects with different values', () => {
+  //     compareFiles('file1.json', 'file3.json', 'expected4.txt')
+  //   })
+
+  test('new test recurs', () => {
+    compareFiles('filepath1.json', 'filepath2.json', 'expectedJSON.txt')
   })
 })

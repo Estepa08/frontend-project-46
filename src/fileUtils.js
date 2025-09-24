@@ -2,11 +2,23 @@ import fs from 'fs'
 import path from 'path'
 
 export const getAbsolutePath = (filepath) => {
-  const absolutePath = path.resolve(process.cwd(), filepath)
-  if (!fs.existsSync(absolutePath)) {
-    throw new Error(`File not found: ${filepath}`)
+  let absolutePath = path.resolve(process.cwd(), filepath)
+  if (fs.existsSync(absolutePath)) {
+    return absolutePath
   }
-  return absolutePath
+
+  const examplesPath = path.resolve(
+    process.cwd(),
+    'examples',
+    filepath,
+  )
+  if (fs.existsSync(examplesPath)) {
+    return examplesPath
+  }
+
+  throw new Error(
+    `File not found: ${filepath}. Please make sure the file exists in current directory or in __fixtures__/examples/`,
+  )
 }
 
 export const readFile = (absolutePath) => {

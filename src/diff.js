@@ -1,22 +1,34 @@
-export const diff = (obj1, obj2) => {
-  const keys = [...new Set([...Object.keys(obj1), ...Object.keys(obj2)])]
-    .sort((a, b) => a.localeCompare(b))
+import { stylish } from './formatter.js'
 
-  const lines = keys.map((key) => {
+export const diff = (obj1, obj2, format = 'stylish') => {
+  const diffTree = buildDiff(obj1, obj2)
+  if (format === 'stylish') {
+    return stylish(diffTree)
+  }
+  throw new Error(`Unknown format: ${format}`)
+}
+
+const isObject = value =>
+  typeof value === 'object' && value !== null && !Array.isArray(value)
+
+const buildDiff = (obj1, obj2) => {
+  const keys = [...new Set([...Object.keys(obj1), ...Object.keys(obj2)])].sort(
+    (a, b) => a.localeCompare(b),
+  )
+
+  return keys.map((key) => {
     if (!Object.hasOwn(obj2, key)) {
-      return `  - ${key}: ${obj1[key]}`
+      return { type: 'removed', key, value: obj1[key] }
     }
     if (!Object.hasOwn(obj1, key)) {
-      return `  + ${key}: ${obj2[key]}`
+      return { type: 'added', key, value: obj2[key] }
+    }
+    if (isObject(obj1[key]) && isObject(obj2[key])) {
+      return { type: 'nested', key, children: buildDiff(obj1[key], obj2[key]) }
     }
     if (obj1[key] !== obj2[key]) {
-      return [
-        `  - ${key}: ${obj1[key]}`,
-        `  + ${key}: ${obj2[key]}`,
-      ].join('\n')
+      return { type: 'changed', key, oldValue: obj1[key], newValue: obj2[key] }
     }
-    return `    ${key}: ${obj1[key]}`
+    return { type: 'unchanged', key, value: obj1[key] }
   })
-
-  return `{\n${lines.join('\n')}\n}`
 }
