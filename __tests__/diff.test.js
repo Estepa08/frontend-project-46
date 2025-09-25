@@ -19,31 +19,38 @@ const compareFiles = (file1, file2, format, expectedFile) => {
   const obj1 = parseFile(getFixturePath(file1))
   const obj2 = parseFile(getFixturePath(file2))
   const expected = readFile(expectedFile)
+
   expect(formatter(getDiff(obj1, obj2), format)).toBe(expected)
 }
 
-describe('difference', () => {
-  test('check default format', () => {
-    compareFiles('file1.json', 'file2.json', 'stylish', 'expected_default.txt')
-    compareFiles('file1.yaml', 'file2.yaml', 'stylish', 'expected_default.txt')
-    compareFiles('file1.yml', 'file2.yml', 'stylish', 'expected_default.txt')
-  })
-
-  test('check stylish format', () => {
+describe('gendiff formats', () => {
+  test('default (stylish)', () => {
     compareFiles('file1.json', 'file2.json', 'stylish', 'expected_stylish.txt')
     compareFiles('file1.yaml', 'file2.yaml', 'stylish', 'expected_stylish.txt')
     compareFiles('file1.yml', 'file2.yml', 'stylish', 'expected_stylish.txt')
   })
 
-  test('check plain format', () => {
+  test('plain format', () => {
     compareFiles('file1.json', 'file2.json', 'plain', 'expected_plain.txt')
     compareFiles('file1.yaml', 'file2.yaml', 'plain', 'expected_plain.txt')
     compareFiles('file1.yml', 'file2.yml', 'plain', 'expected_plain.txt')
   })
 
-  test('check json format', () => {
+  test('json format', () => {
     compareFiles('file1.json', 'file2.json', 'json', 'expected_json.txt')
     compareFiles('file1.yaml', 'file2.yaml', 'json', 'expected_json.txt')
     compareFiles('file1.yml', 'file2.yml', 'json', 'expected_json.txt')
+  })
+
+  test('empty files', () => {
+    compareFiles('empty.json', 'empty.json', 'stylish', 'expected_empty.txt')
+    compareFiles('empty.yaml', 'empty.yaml', 'stylish', 'expected_empty.txt')
+    compareFiles('empty.yml', 'empty.yml', 'stylish', 'expected_empty.txt')
+  })
+
+  test('parsers and formatter errors', () => {
+    expect(() => parseFile(getFixturePath('unsupported.txt'))).toThrow(
+      /Unknown format/,
+    )
   })
 })
