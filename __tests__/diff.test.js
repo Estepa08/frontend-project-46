@@ -40,4 +40,10 @@ describe('difference', () => {
     compareFiles('file1.yaml', 'file2.yaml', 'plain', 'expected_plain.txt')
     compareFiles('file1.yml', 'file2.yml', 'plain', 'expected_plain.txt')
   })
+
+  test('check json format', () => {
+    compareFiles('file1.json', 'file2.json', 'json', 'expected_json.txt')
+    compareFiles('file1.yaml', 'file2.yaml', 'json', 'expected_json.txt')
+    compareFiles('file1.yml', 'file2.yml', 'json', 'expected_json.txt')
+  })
 })

@@ -1,9 +1,8 @@
-const isObject = value =>
-  typeof value === 'object' && value !== null && !Array.isArray(value)
+import _ from 'lodash'
 
 const stringify = (value) => {
-  if (isObject(value)) return '[complex value]'
-  if (typeof value === 'string') return `'${value}'`
+  if (_.isPlainObject(value)) return '[complex value]'
+  if (_.isString(value)) return `'${value}'`
   return String(value)
 }
 

@@ -1,22 +1,19 @@
-const spacesPerLevel = 4 // количество пробелов для одного уровня вложенности
-const leftShift = 2 // смещение влево (для символа +/-)
+import _ from 'lodash'
 
-const isObject = value =>
-  typeof value === 'object' && value !== null && !Array.isArray(value)
+const spacesPerLevel = 4
+const leftShift = 2
 
-// Формула для вычисления отступа:
-// глубина * количество пробелов на уровень – смещение
 const makeIndent = (depth, withShift = false) => {
   const indentSize = depth * spacesPerLevel - (withShift ? leftShift : 0)
   return ' '.repeat(indentSize)
 }
 
 const stringify = (data, depth) => {
-  if (!isObject(data)) {
+  if (!_.isPlainObject(data)) {
     return String(data)
   }
 
-  const entries = Object.entries(data).map(
+  const entries = _.entries(data).map(
     ([key, value]) =>
       `${makeIndent(depth + 1)}${key}: ${stringify(value, depth + 1)}`,
   )

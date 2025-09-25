@@ -1,22 +1,19 @@
-const isObject = value =>
-  typeof value === 'object' && value !== null && !Array.isArray(value)
+import _ from 'lodash'
 
 const buildDiff = (obj1, obj2) => {
-  const keys = [...new Set([...Object.keys(obj1), ...Object.keys(obj2)])].sort(
-    (a, b) => a.localeCompare(b),
-  )
+  const keys = _.sortBy(_.union(_.keys(obj1), _.keys(obj2)))
 
   return keys.map((key) => {
-    if (!Object.hasOwn(obj2, key)) {
+    if (!_.has(obj2, key)) {
       return { type: 'removed', key, value: obj1[key] }
     }
-    if (!Object.hasOwn(obj1, key)) {
+    if (!_.has(obj1, key)) {
       return { type: 'added', key, value: obj2[key] }
     }
-    if (isObject(obj1[key]) && isObject(obj2[key])) {
+    if (_.isPlainObject(obj1[key]) && _.isPlainObject(obj2[key])) {
       return { type: 'nested', key, children: buildDiff(obj1[key], obj2[key]) }
     }
-    if (obj1[key] !== obj2[key]) {
+    if (!_.isEqual(obj1[key], obj2[key])) {
       return { type: 'changed', key, oldValue: obj1[key], newValue: obj2[key] }
     }
     return { type: 'unchanged', key, value: obj1[key] }
