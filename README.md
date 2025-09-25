@@ -8,7 +8,7 @@
 
 
 **Difference .yaml flat**
-[![asciicast](https://asciinema.org/a/2xIIDu5nh9eN1S9zPCZ6Z5U06](https://asciinema.org/a/2xIIDu5nh9eN1S9zPCZ6Z5U06)
+[![asciicast](https://asciinema.org/a/2xIIDu5nh9eN1S9zPCZ6Z5U06.svg)](https://asciinema.org/a/2xIIDu5nh9eN1S9zPCZ6Z5U06)
 
 
 **Difference nested 'stylish' format**
