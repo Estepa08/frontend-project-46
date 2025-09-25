@@ -3,14 +3,18 @@
 
 ## 🎮 Демонстрация работы
 
-**Diff: JSON/JSON**
-[![asciicast](https://asciinema.org/a/D6yqwbJuq3xnfOW6Dfhe8YXV4.svg)](https://asciinema.org/a/D6yqwbJuq3xnfOW6Dfhe8YXV4)
+**Difference .json flat**
+[![asciicast](https://asciinema.org/a/ngqH56mefh01pY3OSIBWqHNCL.svg)](https://asciinema.org/a/ngqH56mefh01pY3OSIBWqHNCL)
 
 
-**Diff: JSON/YAML/YML**
-[![asciicast](https://asciinema.org/a/kbk2LfWWDy9GBH6zNRPKWKT7v.svg)](https://asciinema.org/a/kbk2LfWWDy9GBH6zNRPKWKT7v)
+**Difference .yaml flat**
+[![asciicast](https://asciinema.org/a/2xIIDu5nh9eN1S9zPCZ6Z5U06](https://asciinema.org/a/2xIIDu5nh9eN1S9zPCZ6Z5U06)
 
 
-**Diff: NESTING**
-[![asciicast](https://asciinema.org/a/kDfsceVtKMOUgzj7Jh0OMaiOL.svg)](https://asciinema.org/a/kDfsceVtKMOUgzj7Jh0OMaiOL)
+**Difference nested 'stylish' format**
+[![asciicast](https://asciinema.org/a/0gmvuIQYWsCaTFQy2CgBtUgDd.svg)](https://asciinema.org/a/0gmvuIQYWsCaTFQy2CgBtUgDd)
+
+
+**Difference nested 'plain' format**
+[![asciicast](https://asciinema.org/a/xZeik2mYJS847OuBJMR11PXQe](https://asciinema.org/a/xZeik2mYJS847OuBJMR11PXQe)
 
