@@ -18,3 +18,7 @@
 **Difference nested 'plain' format**
 [![asciicast](https://asciinema.org/a/xZeik2mYJS847OuBJMR11PXQe.svg)](https://asciinema.org/a/xZeik2mYJS847OuBJMR11PXQe)
 
+
+**Difference nested 'json' format**
+[![asciicast](https://asciinema.org/a/Zo9jJe803D8g6ZmweUkP3x50G.svg)](https://asciinema.org/a/Zo9jJe803D8g6ZmweUkP3x50G)
+
