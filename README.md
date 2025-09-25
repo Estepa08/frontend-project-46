@@ -16,5 +16,5 @@
 
 
 **Difference nested 'plain' format**
-[![asciicast](https://asciinema.org/a/xZeik2mYJS847OuBJMR11PXQe](https://asciinema.org/a/xZeik2mYJS847OuBJMR11PXQe)
+[![asciicast](https://asciinema.org/a/xZeik2mYJS847OuBJMR11PXQe.svg)](https://asciinema.org/a/xZeik2mYJS847OuBJMR11PXQe)
 
