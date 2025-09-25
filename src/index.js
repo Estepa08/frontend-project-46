@@ -8,7 +8,7 @@ const resolvePath = filepath => path.resolve(process.cwd(), filepath)
 
 const getFormat = filepath => path.extname(filepath).slice(1)
 
-const parseFile = filepath =>
+export const parseFile = filepath =>
   parser(readFileSync(resolvePath(filepath), 'utf-8'), getFormat(filepath))
 
 const gendiff = (filepath1, filepath2, formatName = 'stylish') => {
