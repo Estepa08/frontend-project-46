@@ -1,40 +1,52 @@
-const formatValue = (value, depth = 1) => {
-  if (typeof value !== 'object' || value === null) {
-    return String(value)
+const spacesPerLevel = 4 // количество пробелов для одного уровня вложенности
+const leftShift = 2 // смещение влево (для символа +/-)
+
+const isObject = value =>
+  typeof value === 'object' && value !== null && !Array.isArray(value)
+
+// Формула для вычисления отступа:
+// глубина * количество пробелов на уровень – смещение
+const makeIndent = (depth, withShift = false) => {
+  const indentSize = depth * spacesPerLevel - (withShift ? leftShift : 0)
+  return ' '.repeat(indentSize)
+}
+
+const stringify = (data, depth) => {
+  if (!isObject(data)) {
+    return String(data)
   }
 
-  const indent = ' '.repeat(depth * 4)
-  const bracketIndent = ' '.repeat((depth - 1) * 4)
-
-  const lines = Object.entries(value).map(
-    ([key, val]) => `${indent}${key}: ${formatValue(val, depth + 1)}`,
+  const entries = Object.entries(data).map(
+    ([key, value]) =>
+      `${makeIndent(depth + 1)}${key}: ${stringify(value, depth + 1)}`,
   )
 
-  return `{\n${lines.join('\n')}\n${bracketIndent}}`
+  return `{\n${entries.join('\n')}\n${makeIndent(depth)}}`
 }
 
-export const stylish = (tree, depth = 1) => {
-  const indent = (sign = ' ') => ' '.repeat(depth * 4 - 2) + sign + ' '
-
-  const lines = tree.map((node) => {
+const formatTree = (tree, depth = 1) =>
+  tree.map((node) => {
     switch (node.type) {
       case 'added':
-        return `${indent('+')}${node.key}: ${formatValue(node.value, depth + 1)}`
+        return `${makeIndent(depth, true)}+ ${node.key}: ${stringify(node.value, depth)}`
       case 'removed':
-        return `${indent('-')}${node.key}: ${formatValue(node.value, depth + 1)}`
-      case 'unchanged':
-        return `${indent(' ')}${node.key}: ${formatValue(node.value, depth + 1)}`
+        return `${makeIndent(depth, true)}- ${node.key}: ${stringify(node.value, depth)}`
       case 'changed':
         return [
-          `${indent('-')}${node.key}: ${formatValue(node.oldValue, depth + 1)}`,
-          `${indent('+')}${node.key}: ${formatValue(node.newValue, depth + 1)}`,
+          `${makeIndent(depth, true)}- ${node.key}: ${stringify(node.oldValue, depth)}`,
+          `${makeIndent(depth, true)}+ ${node.key}: ${stringify(node.newValue, depth)}`,
         ].join('\n')
-      case 'nested':
-        return `${indent(' ')}${node.key}: ${stylish(node.children, depth + 1)}`
-
+      case 'nested': {
+        const children = formatTree(node.children, depth + 1).join('\n')
+        return `${makeIndent(depth)}${node.key}: {\n${children}\n${makeIndent(depth)}}`
+      }
+      case 'unchanged':
+        return `${makeIndent(depth)}${node.key}: ${stringify(node.value, depth)}`
       default:
-        throw new Error(`Unknown type: ${node.type}`)
+        throw new Error(`Unknown node type: ${node.type}`)
     }
   })
-  return `{\n${lines.join('\n')}\n${' '.repeat((depth - 1) * 4)}}`
-}
+
+const stylish = tree => `{\n${formatTree(tree).join('\n')}\n}`
+
+export default stylish

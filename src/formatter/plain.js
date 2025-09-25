@@ -1,34 +1,31 @@
-const formatValue = (value) => {
-  if (value === null) return 'null'
-  if (typeof value === 'object') return '[complex value]'
-  return typeof value === 'string' ? `'${value}'` : String(value)
+const isObject = value =>
+  typeof value === 'object' && value !== null && !Array.isArray(value)
+
+const stringify = (value) => {
+  if (isObject(value)) return '[complex value]'
+  if (typeof value === 'string') return `'${value}'`
+  return String(value)
 }
 
-const makePath = (path, key) => (path ? `${path}.${key}` : key)
+const formatTree = (tree, path = '') =>
+  tree
+    .filter(({ type }) => type !== 'unchanged')
+    .map((node) => {
+      switch (node.type) {
+        case 'added':
+          return `Property '${path}${node.key}' was added with value: ${stringify(node.value)}`
+        case 'changed':
+          return `Property '${path}${node.key}' was updated. From ${stringify(node.oldValue)} to ${stringify(node.newValue)}`
+        case 'nested':
+          return formatTree(node.children, `${path}${node.key}.`)
+        case 'removed':
+          return `Property '${path}${node.key}' was removed`
+        default:
+          throw new Error(`Unknown node type: ${node.type}`)
+      }
+    })
+    .join('\n')
 
-const formatNode = (node, path) => {
-  const { type, key, value, oldValue, newValue, children } = node
-  const currentPath = makePath(path, key)
-
-  switch (type) {
-    case 'added':
-      return `Property '${currentPath}' was added with value: ${formatValue(value)}`
-    case 'removed':
-      return `Property '${currentPath}' was removed`
-    case 'changed':
-      return `Property '${currentPath}' was updated. From ${formatValue(oldValue)} to ${formatValue(newValue)}`
-    case 'nested':
-      return plain(children, currentPath)
-    case 'unchanged':
-      return null
-    default:
-      throw new Error(`Unknown node type: ${type}`)
-  }
-}
-
-export const plain = (tree, path = '') => {
-  const lines = tree.map(node => formatNode(node, path)).filter(Boolean)
-  return lines.join('\n')
-}
+const plain = tree => formatTree(tree)
 
 export default plain

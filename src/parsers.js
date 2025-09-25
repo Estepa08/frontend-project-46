@@ -1,22 +1,15 @@
 import yaml from 'js-yaml'
-import path from 'path'
-import { getAbsolutePath, readFile } from './fileUtils.js'
 
-const parsers = {
-  '.json': JSON.parse,
-  '.yml': yaml.load,
-  '.yaml': yaml.load,
-}
-
-export const parseFile = (filepath) => {
-  const absolutePath = getAbsolutePath(filepath)
-  const extname = path.extname(filepath)
-  const parse = parsers[extname]
-
-  if (!parse) {
-    throw new Error(`Unsupported file format: ${extname}`)
+const parser = (filepath, format) => {
+  switch (format) {
+    case 'json':
+      return JSON.parse(filepath)
+    case 'yaml':
+      return yaml.load(filepath)
+    case 'yml':
+      return yaml.load(filepath)
+    default:
+      throw new Error(`Unknown format: ${format}`)
   }
-
-  const rawData = readFile(absolutePath)
-  return parse(rawData)
 }
+export default parser

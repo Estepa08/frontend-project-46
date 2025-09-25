@@ -1,5 +1,6 @@
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
+import formatter from '../src/formatter/index.js'
 
 import { parseFile } from '../src/parsers.js'
 import { readFile } from '../src/fileUtils.js'

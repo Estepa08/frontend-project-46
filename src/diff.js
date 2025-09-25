@@ -1,10 +1,3 @@
-import format from './formatter/index.js'
-
-export const diff = (obj1, obj2, formatName) => {
-  const diffTree = buildDiff(obj1, obj2)
-  return format(diffTree, formatName)
-}
-
 const isObject = value =>
   typeof value === 'object' && value !== null && !Array.isArray(value)
 
@@ -29,3 +22,7 @@ const buildDiff = (obj1, obj2) => {
     return { type: 'unchanged', key, value: obj1[key] }
   })
 }
+
+const getDiff = (obj1, obj2) => buildDiff(obj1, obj2)
+
+export default getDiff
