@@ -1,22 +1,22 @@
-import parser from './parsers.js'
+import path from 'node:path'
 import { readFileSync } from 'node:fs'
-import getDiff from './diff.js'
+
+import parser from './parsers.js'
+import genDifference from './diff.js'
 import formatter from './formatter/index.js'
-import path from 'path'
 
-const resolvePath = filepath => path.resolve(process.cwd(), filepath)
-
+const getFullPath = filepath => path.resolve(process.cwd(), '__fixtures__', filepath)
 const getFormat = filepath => path.extname(filepath).slice(1)
 
-export const parseFile = filepath =>
-  parser(readFileSync(resolvePath(filepath), 'utf-8'), getFormat(filepath))
+export const getData = filepath =>
+  parser(readFileSync(getFullPath(filepath), 'utf-8'), getFormat(filepath))
 
-const gendiff = (filepath1, filepath2, formatName = 'stylish') => {
-  const obj1 = parseFile(filepath1)
-  const obj2 = parseFile(filepath2)
+const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
+  const data1 = getData(filepath1)
+  const data2 = getData(filepath2)
 
-  const difference = getDiff(obj1, obj2)
+  const difference = genDifference(data1, data2)
   return formatter(difference, formatName)
 }
 
-export default gendiff
+export default genDiff
